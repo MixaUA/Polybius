@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шифр Полібія для української абетки</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Зображення без рамки -->
+    <div class="header-image">
+        <img src="image/Polibius.png" alt="Квадрат Полібія">
+    </div>
+
+    <h1>Шифр Полібія</h1>
+
+    <div class="polybius-grid">
+        <div class="cell header"></div>
+        <div class="cell header">1</div>
+        <div class="cell header">2</div>
+        <div class="cell header">3</div>
+        <div class="cell header">4</div>
+        <div class="cell header">5</div>
+        <div class="cell header">6</div>
+        
+        <div class="cell header">1</div>
+        <div class="cell letter">А</div>
+        <div class="cell letter">Б</div>
+        <div class="cell letter">В</div>
+        <div class="cell letter">Г</div>
+        <div class="cell letter">Ґ</div>
+        <div class="cell letter">Д</div>
+        
+        <div class="cell header">2</div>
+        <div class="cell letter">Е</div>
+        <div class="cell letter">Є</div>
+        <div class="cell letter">Ж</div>
+        <div class="cell letter">З</div>
+        <div class="cell letter">И</div>
+        <div class="cell letter">І</div>
+        
+        <div class="cell header">3</div>
+        <div class="cell letter">Ї</div>
+        <div class="cell letter">Й</div>
+        <div class="cell letter">К</div>
+        <div class="cell letter">Л</div>
+        <div class="cell letter">М</div>
+        <div class="cell letter">Н</div>
+        
+        <div class="cell header">4</div>
+        <div class="cell letter">О</div>
+        <div class="cell letter">П</div>
+        <div class="cell letter">Р</div>
+        <div class="cell letter">С</div>
+        <div class="cell letter">Т</div>
+        <div class="cell letter">У</div>
+        
+        <div class="cell header">5</div>
+        <div class="cell letter">Ф</div>
+        <div class="cell letter">Х</div>
+        <div class="cell letter">Ц</div>
+        <div class="cell letter">Ч</div>
+        <div class="cell letter">Ш</div>
+        <div class="cell letter">Щ</div>
+        
+        <div class="cell header">6</div>
+        <div class="cell letter">Ь</div>
+        <div class="cell letter">Ю</div>
+        <div class="cell letter">Я</div>
+        <div class="cell letter">.</div>
+        <div class="cell letter">,</div>
+        <div class="cell letter">␣</div>
+    </div>
+    
+    <label for="input">Введіть текст або зашифрований код:</label>
+    <div class="input-wrapper">
+        <textarea id="input" placeholder="Привіт! Це поле для вводу! Тут я кодую і декодую. Спробуй !"></textarea>
+        <div class="clear-btn" id="clearBtn"></div>
+    </div>
+    
+    <label class="checkbox-wrapper">
+        <input type="checkbox" id="ignoreCase" />
+        <div class="toggle"></div>
+        <span>Ігнорувати регістр при кодуванні</span>
+    </label>
+    
+    <button onclick="process()">Обробити</button>
+    
+    <label>Результат:</label>
+    <div id="output"></div>
+    
+    <button id="copyBtn" onclick="copyResult()">Копіювати результат</button>
+
+    <p><small><strong>Як працює квадрат Полібія?</strong><br><br>
+    Подивися на таблицю вгорі, кожна літера української абетки, крапка, кома і пробіл мають своє місце — рядок і стовпець.<br><br>
+    Наприклад: <br>
+    ● Літера "П" стоїть у рядку 4, стовпці 2 — її код 42.<br>
+    ● Літера "А" — рядок 1, стовпець 1 — код 11.<br>
+    ● Пробіл — код 66.<br><br>
+    Щоб зашифрувати слово "Привіт!", беремо коди кожної літери:<br>
+    П = 42, р = 43, и = 26, в = 13, і = 26, т = 45, [!].<br><br>
+    Будь-які символи та числа, які є в тексті, але відсутні в таблиці, беруться в [...].<br><br>
+    Виходить: ¿^42 43 26 13 26 45 [!] .</small></p>
+
+    <script src="script.js"></script>
+</body>
+</html>
