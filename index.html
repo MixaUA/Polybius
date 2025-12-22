@@ -3,112 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Шифр Полібія для української абетки</title>
+    <title>Шифр Полібія UA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Зображення без рамки -->
-    <div class="header-image">
-        <img src="image/Polibius.png" alt="Квадрат Полібія">
+    <div class="main-wrapper">
+        <img src="image/Polibius.png" class="top-logo" alt="Квадрат Полібія">
+
+        <div class="polybius-master-grid" id="polybiusGrid">
+            <div class="grid-cell label"></div>
+            <div class="grid-cell label">1</div><div class="grid-cell label">2</div><div class="grid-cell label">3</div>
+            <div class="grid-cell label">4</div><div class="grid-cell label">5</div><div class="grid-cell label">6</div>
+        </div>
+
+        <div class="text-fields">
+            <div class="field-group">
+                <label>Текст або код</label>
+                <div class="textarea-container">
+                    <textarea id="input" placeholder="Введіть текст для обробки..."></textarea>
+                    <button class="icon-btn clear" id="clearBtn">✕</button>
+                    <div class="action-btns">
+                        <button class="icon-btn" id="copy-input-btn">Копіювати</button>
+                    </div>
+                </div>
+            </div>
+
+            <label class="checkbox-wrapper">
+                <input type="checkbox" id="ignoreCase" />
+                <div class="toggle"></div>
+                <span>Ігнорувати регістр</span>
+            </label>
+
+            <div class="field-group">
+                <label>Результат</label>
+                <div class="textarea-container">
+                    <textarea id="output" readonly placeholder="Результат зʼявиться тут..."></textarea>
+                    <button class="icon-btn clear" id="clearBtnOutput">✕</button>
+                    <div class="action-btns">
+                        <button class="icon-btn" id="copy-output-btn">Копіювати</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wiki-section">
+            <div class="wiki-divider"></div>
+            <div class="wiki-title">Як працює квадрат Полібія?</div>
+            <div class="wiki-content">
+                <p>Спочатку квадрат Полібія був не стільки "шифром" для приховування таємниць, скільки геніальним способом передачі будь-якого повідомлення на відстань, схожим на абетку Морзе. Історик <strong>Полібій</strong>, який жив у Стародавній Греції, придумав цей квадрат, щоб перетворювати літери на пари чисел, які можна було легко показувати смолоскипами. Вже пізніше цей самий принцип почали використовувати і для простого шифрування.</p>
+                <p>Кожна літера української абетки, крапка, кома і пробіл мають своє місце в таблиці — рядок і стовпець.</p>
+    
+                <h4>Приклад кодування</h4>
+                <ul>
+                    <li>Літера <strong>"П"</strong> стоїть у рядку 4, стовпці 2 — її код <strong>42</strong>.</li>
+                    <li>Літера <strong>"А"</strong> — рядок 1, стовпець 1 — її код <strong>11</strong>.</li>
+                    <li>Пробіл (<strong>␣</strong>) — рядок 6, стовпець 6 — код <strong>66</strong>.</li>
+                </ul>
+
+                <h4>Особливості шифру</h4>
+                <ul>
+                    <li><strong>Великі літери:</strong> Позначаються символом <strong>^</strong> перед парою чисел (наприклад: <strong>^42</strong> = П, <strong>42</strong> = п).</li>
+                    <li><strong>Інші символи:</strong> Будь-які символи та числа, що є в тексті, але відсутні в таблиці, беруться в квадратні дужки (наприклад: <strong>[!]</strong> або <strong>[7]</strong>).</li>
+                </ul>
+
+                <h4>Як працювати з програмою?</h4>
+                <p>Просто почни вводити текст у поле. Шифрування відбувається автоматично. Щоб розшифрувати код, переконайся, що він починається зі спеціального символу <strong>¿</strong>, який встановлюється при кодуванні. Програма використовує цей символ, щоб відрізнити зашифрований текст від звичайного.</p>
+            </div>
+        </div>
     </div>
 
-    <h1>Шифр Полібія</h1>
-
-    <div class="polybius-grid">
-        <div class="cell header"></div>
-        <div class="cell header">1</div>
-        <div class="cell header">2</div>
-        <div class="cell header">3</div>
-        <div class="cell header">4</div>
-        <div class="cell header">5</div>
-        <div class="cell header">6</div>
-        
-        <div class="cell header">1</div>
-        <div class="cell letter">А</div>
-        <div class="cell letter">Б</div>
-        <div class="cell letter">В</div>
-        <div class="cell letter">Г</div>
-        <div class="cell letter">Ґ</div>
-        <div class="cell letter">Д</div>
-        
-        <div class="cell header">2</div>
-        <div class="cell letter">Е</div>
-        <div class="cell letter">Є</div>
-        <div class="cell letter">Ж</div>
-        <div class="cell letter">З</div>
-        <div class="cell letter">И</div>
-        <div class="cell letter">І</div>
-        
-        <div class="cell header">3</div>
-        <div class="cell letter">Ї</div>
-        <div class="cell letter">Й</div>
-        <div class="cell letter">К</div>
-        <div class="cell letter">Л</div>
-        <div class="cell letter">М</div>
-        <div class="cell letter">Н</div>
-        
-        <div class="cell header">4</div>
-        <div class="cell letter">О</div>
-        <div class="cell letter">П</div>
-        <div class="cell letter">Р</div>
-        <div class="cell letter">С</div>
-        <div class="cell letter">Т</div>
-        <div class="cell letter">У</div>
-        
-        <div class="cell header">5</div>
-        <div class="cell letter">Ф</div>
-        <div class="cell letter">Х</div>
-        <div class="cell letter">Ц</div>
-        <div class="cell letter">Ч</div>
-        <div class="cell letter">Ш</div>
-        <div class="cell letter">Щ</div>
-        
-        <div class="cell header">6</div>
-        <div class="cell letter">Ь</div>
-        <div class="cell letter">Ю</div>
-        <div class="cell letter">Я</div>
-        <div class="cell letter">.</div>
-        <div class="cell letter">,</div>
-        <div class="cell letter">␣</div>
-    </div>
-    
-    <label for="input">Введіть текст або зашифрований код:</label>
-    <div class="input-wrapper">
-        <textarea id="input" placeholder="Привіт! Це поле для вводу! Тут я кодую і декодую. Спробуй !"></textarea>
-        <div class="clear-btn" id="clearBtn"></div>
-    </div>
-    
-    <label class="checkbox-wrapper">
-        <input type="checkbox" id="ignoreCase" />
-        <div class="toggle"></div>
-        <span>Ігнорувати регістр при кодуванні</span>
-    </label>
-    
-    <button onclick="process()">Обробити</button>
-    
-    <label>Результат:</label>
-    <div id="output"></div>
-    
-    <button id="copyBtn" onclick="copyResult()">Копіювати результат</button>
-
-    <p><small><strong>Як працює квадрат Полібія?</strong><br><br>
-    Подивися на таблицю вгорі, кожна літера української абетки, крапка, кома і пробіл мають своє місце — рядок і стовпець.<br><br>
-    Наприклад: <br>
-    ● Літера "П" стоїть у рядку 4, стовпці 2 — її код 42.<br>
-    ● Літера "А" — рядок 1, стовпець 1 — код 11.<br>
-    ● Пробіл — код 66.<br><br>
-    Щоб зашифрувати слово "Привіт!", беремо коди кожної літери:<br>
-    П = 42, р = 43, и = 25, в = 13, і = 26, т = 45, [!].<br><br>
-    Будь-які символи та числа, які є в тексті, але відсутні в таблиці, беруться в [...].<br><br>
-    Велика літера = символ ^ перед парою (наприклад: ^42 = П, 42 = п)<br><br>
-    Виходить: ¿^42 43 25 13 26 45 [!] .<br><br>
-    Символ ¿ на початку коду присвоюється при кодуванні і є розпізнавачем для кнопки "Обробити".<br>
-    Якщо декодуєте свій код, то встановлюйте цей символ самостійно на самому початку!
-    </small></p>
-
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
-
-
-
