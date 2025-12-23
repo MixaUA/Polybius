@@ -235,20 +235,23 @@ textarea, #output {
     right: 15px;
     width: 30px;
     height: 30px;
-    background: rgba(0,0,0,0.1);
-    border: none;
-    border-radius: 50%;
-    color: var(--accent-color);
+    background: transparent; /* Transparent background */
+    border: 2px solid var(--accent-color); /* Black border, matching other buttons */
+    border-radius: 8px; /* Slightly rounded corners for a modern square look */
+    color: var(--accent-color); /* Color of the '✕' */
     font-size: 16px;
     font-weight: bold;
-    line-height: 30px;
+    line-height: 26px; /* Adjust line-height for vertical centering of '✕' in 30px height with 2px border */
     text-align: center;
     cursor: pointer;
     z-index: 999;
+    box-sizing: border-box; /* Ensures padding/border are included in width/height */
+    -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+    transition: all 0.2s; /* Smooth transitions */
 }
 
 .close-app-btn:hover {
-    background: rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.05); /* Slight background on hover */
 }
 
 /* Show the button only when in standalone (PWA) mode */
