@@ -1,5 +1,5 @@
 :root {
-    --bg-color: #ffffff;
+    --bg-color: rgb(230, 240, 250);
     --accent-color: #000000;
     --red-color: #e53e3e;
     --container-max-width: 600px;
@@ -27,6 +27,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    box-sizing: border-box;
 }
 
 .top-logo {
@@ -56,6 +57,7 @@ h2 {
     margin: 20px auto;
     border: var(--line-weight) solid var(--accent-color);
     border-radius: 10px; /* Add this line */
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
 }
 
 .grid-cell {
@@ -120,7 +122,7 @@ textarea, #output {
     resize: none;
     outline: none;
     overflow: hidden; /* Ховаємо скроллбар для авто-висоти */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
     transition: height 0.1s ease;
 }
 
@@ -182,21 +184,36 @@ textarea, #output {
 }
 .checkbox-wrapper input { display: none; }
 .toggle {
-    width: 44px; height: 24px; background: #e0e0e0;
-    border-radius: 12px; position: relative; transition: 0.3s;
+    width: 44px; height: 24px; background: white;
+    border: 2px solid var(--accent-color);
+    border-radius: 6px; position: relative; transition: 0.3s;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
 }
 .checkbox-wrapper input:checked + .toggle { background: var(--accent-color); }
 .toggle::after {
     content: ''; position: absolute; width: 18px; height: 18px;
-    left: 3px; top: 3px; background: white; border-radius: 50%; transition: 0.3s;
+    left: 2px; background: var(--accent-color); border-radius: 4px; transition: 0.3s;
 }
-.checkbox-wrapper input:checked + .toggle::after { transform: translateX(20px); }
+.checkbox-wrapper input:checked + .toggle::after { 
+    background: white;
+    transform: translateX(20px); 
+}
 
 /* ВІКІ */
 .wiki-section { width: 100%; max-width: 500px; margin-top: 40px; color: var(--accent-color); }
 .wiki-divider { height: 1px; background: var(--accent-color); margin-bottom: 30px; }
 .wiki-title { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; text-align: center; margin-bottom: 20px; letter-spacing: 1px; }
-.wiki-content { background: #fff; padding: 25px; border-radius: 18px; border: 2px solid var(--accent-color); font-size: 15px; line-height: 1.6; }
+.wiki-content {
+    background: #fff;
+    padding: 25px;
+    border-radius: 18px;
+    border: 2px solid var(--accent-color);
+    font-size: 15px;
+    line-height: 1.6;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+}
 .wiki-content p { margin-bottom: 15px; }
 .wiki-content ul { margin: 0 0 15px; padding-left: 20px; }
 .wiki-content li { margin-bottom: 8px; font-size: 14px; }

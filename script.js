@@ -88,9 +88,9 @@ function clearEverything() {
 
     clearBtnOutput.style.display = 'none';
 
-    autoResize(input);
+    input.style.height = 'auto';
 
-    autoResize(outputDiv);
+    outputDiv.style.height = 'auto';
 
 }
 
@@ -139,45 +139,68 @@ function autoResize(el) {
 
 
 // Main processing function
+function formatNumbers(text) {
+    const cleaned = text.replace(/\s/g, '');
+    if (cleaned.length === 0) {
+        return '';
+    }
+    
+    let result = [];
+    for (let i = 0; i < cleaned.length; i += 4) {
+        const chunk = cleaned.substring(i, i + 4);
+        result.push(`[${chunk}]`);
+    }
+    return result.join(''); 
+}
 
 function process() {
-
     let val = input.value;
-
     let ignoreCase = ignoreCaseCheckbox.checked;
 
-    
-
     if (!val.trim()) {
-
-        outputDiv.value = ''; // Use .value
-
-        clearEverything(); // Clear all if input is empty
-
+        outputDiv.value = '';
+        clearEverything();
         return;
-
     }
 
+    const hasLetters = /[а-яіїєґ]/i.test(val);
+    const hasOnlyNumbersAndSpaces = /^[0-9\s]+$/.test(val);
 
-
-    if (val.trim().startsWith('¿')) {
-
-        decrypt(val);
-
-    } else {
-
+    if (hasLetters) {
+        // Case 1: Input has letters. Encrypt it.
         encrypt(val, ignoreCase);
+    } else if (hasOnlyNumbersAndSpaces) {
+        // Case 2: Input is only numbers and spaces. Decide whether to decrypt or format.
+        const numbersOnly = val.replace(/\s/g, '');
+        let allCodesValid = numbersOnly.length > 0 && numbersOnly.length % 2 === 0;
 
+        if (allCodesValid) {
+            for (let i = 0; i < numbersOnly.length; i += 2) {
+                const code = numbersOnly.substring(i, i + 2);
+                if (!codeToLetter[code]) {
+                    allCodesValid = false;
+                    break;
+                }
+            }
+        }
+
+        if (allCodesValid) {
+            decrypt(val);
+        } else {
+            outputDiv.value = formatNumbers(val);
+        }
+    } else {
+        // Case 3: No letters, but has other symbols.
+        if (/[\[\]\^]/.test(val)) {
+            decrypt(val);
+        } else {
+            encrypt(val, ignoreCase);
+        }
     }
-
-
 
     // Handle visibility of output clear button and resizing
-
     clearBtnOutput.style.display = outputDiv.value.length > 0 ? 'block' : 'none';
-
     autoResize(outputDiv);
-
 }
 
 
@@ -186,7 +209,7 @@ function process() {
 
 function encrypt(text, ignoreCase) {
 
-    let result = ['¿'];
+    let result = [];
 
     let i = 0;
 
