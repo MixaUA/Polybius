@@ -1,6 +1,6 @@
 :root {
-    --bg-color: rgb(230, 240, 250);
-    --accent-color: #000000;
+    --bg-color: #f0f2f5;
+    --accent-color: #2d3748;
     --red-color: #e53e3e;
     --container-max-width: 600px;
     --line-weight: 2px;
@@ -181,8 +181,10 @@ textarea, #output {
     margin: 10px 0 10px; font-size: 11px; font-weight: 900;
     text-transform: uppercase; color: var(--accent-color); cursor: pointer;
     user-select: none; /* Додамо для кращого UX */
+    -webkit-tap-highlight-color: transparent;
 }
 .checkbox-wrapper input { display: none; }
+.checkbox-wrapper input:focus-visible { outline: none; }
 .toggle {
     width: 44px; height: 24px; background: white;
     border: 2px solid var(--accent-color);
@@ -220,6 +222,37 @@ textarea, #output {
 .wiki-content h4 { margin: 20px 0 10px; text-transform: uppercase; font-weight: 900; }
 .wiki-content strong { color: var(--red-color); }
 
-@media (max-width: 400px) {
+ @media (max-width: 400px) {
     .polybius-master-grid { grid-template-columns: 25px repeat(6, 1fr); grid-template-rows: 25px repeat(6, 1fr); }
+}
+
+/* PWA Close Button */
+.close-app-btn {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    background: rgba(0,0,0,0.1);
+    border: none;
+    border-radius: 50%;
+    color: var(--accent-color);
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.close-app-btn:hover {
+    background: rgba(0,0,0,0.2);
+}
+
+/* Show the button only when in standalone (PWA) mode */
+@media (display-mode: standalone) {
+    .close-app-btn {
+        display: block;
+    }
 }

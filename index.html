@@ -6,9 +6,12 @@
     <title>Шифр Полібія UA</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#2d3748">
 </head>
 <body>
     <div class="main-wrapper">
+        <button class="close-app-btn" onclick="window.close()">✕</button>
         <img src="image/Polibius.png" class="top-logo" alt="Квадрат Полібія">
 
         <div class="polybius-master-grid" id="polybiusGrid">
@@ -74,5 +77,18 @@
     </div>
 
     <script src="script.js" defer></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
 </body>
 </html>
