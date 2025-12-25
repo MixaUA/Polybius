@@ -260,3 +260,11 @@ textarea, #output {
         display: block;
     }
 }
+
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    text-align: center;
+    color: var(--accent-color);
+    font-size: 0.9em;
+}

@@ -326,3 +326,10 @@ function decrypt(text) {
     outputDiv.value = result;
 
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const yearSpan = document.getElementById('copyright-year');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
+});
